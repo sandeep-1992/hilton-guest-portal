@@ -216,7 +216,7 @@ export default function DashboardClient() {
           disabled={!rows.length || runState === 'running' || !canSendGuests}
           onClick={sendAll}
         >
-          {runState === 'running' ? 'Sending…' : 'Send to front desk'}
+          {runState === 'running' ? 'Sending to Workmate…' : 'Send to Workmate'}
         </button>
 
         {runState !== 'idle' ? (
