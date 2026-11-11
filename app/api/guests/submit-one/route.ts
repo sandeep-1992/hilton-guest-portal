@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getSessionUser } from '@/lib/auth';
-import { submitGuestsToWorkmate } from '@/lib/workmate';
+import { submitOneGuest } from '@/lib/guestSubmit';
 import type { GuestRow } from '@/lib/parseGuests';
 
 export const maxDuration = 300;
@@ -18,16 +18,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const batch = await submitGuestsToWorkmate([row]);
-    const r = batch.results?.[0];
-    if (!r?.ok) {
-      return NextResponse.json({
-        ok: false,
-        code: row.code,
-        guestName: row.guestName,
-        error: r?.error || 'Could not save this guest.',
-      });
-    }
+    await submitOneGuest(row);
     return NextResponse.json({
       ok: true,
       code: row.code,

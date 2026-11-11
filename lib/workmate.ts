@@ -4,7 +4,11 @@ export function workmateEnvStatus(): { ready: boolean; missing: string[] } {
   const missing: string[] = [];
   if (!process.env.WORKMATE_API_URL?.trim()) missing.push('WORKMATE_API_URL');
   if (!process.env.WORKMATE_API_KEY?.trim()) missing.push('WORKMATE_API_KEY');
-  return { ready: missing.length === 0, missing };
+  const webhook =
+    process.env.HILTON_SUBMIT_WEBHOOK_URL?.trim() ||
+    'https://flows.2kvoiceai.com/webhook/hilton-guest-stays/submit';
+  const ready = missing.length === 0 || Boolean(webhook);
+  return { ready, missing };
 }
 
 export async function submitGuestsToWorkmate(rows: GuestRow[]) {
