@@ -40,7 +40,13 @@ export async function getSessionUser(): Promise<string | null> {
 }
 
 export function checkPortalPassword(username: string, password: string): boolean {
-  const u = process.env.HILTON_PORTAL_USER || 'hilton';
-  const p = process.env.HILTON_PORTAL_PASSWORD || 'HiltonWelcome2026';
+  const u = process.env.HILTON_PORTAL_USER;
+  const p = process.env.HILTON_PORTAL_PASSWORD;
+  if (!u || !p) {
+    if (process.env.NODE_ENV === 'development') {
+      return username === 'hilton' && password === 'HiltonWelcome2026';
+    }
+    return false;
+  }
   return username === u && password === p;
 }
