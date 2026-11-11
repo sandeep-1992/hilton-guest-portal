@@ -8,6 +8,10 @@ function secret() {
   return new TextEncoder().encode(s);
 }
 
+async function cookieStore() {
+  return cookies();
+}
+
 export async function createSession(username: string) {
   const token = await new SignJWT({ sub: username })
     .setProtectedHeader({ alg: 'HS256' })
@@ -15,7 +19,8 @@ export async function createSession(username: string) {
     .setExpirationTime('7d')
     .sign(secret());
 
-  cookies().set(COOKIE, token, {
+  const jar = await cookieStore();
+  jar.set(COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
@@ -25,11 +30,13 @@ export async function createSession(username: string) {
 }
 
 export async function clearSession() {
-  cookies().set(COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
+  const jar = await cookieStore();
+  jar.set(COOKIE, '', { httpOnly: true, path: '/', maxAge: 0 });
 }
 
 export async function getSessionUser(): Promise<string | null> {
-  const token = cookies().get(COOKIE)?.value;
+  const jar = await cookieStore();
+  const token = jar.get(COOKIE)?.value;
   if (!token) return null;
   try {
     const { payload } = await jwtVerify(token, secret());

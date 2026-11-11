@@ -3,9 +3,6 @@
   "functions": {
     "app/api/guests/submit-one/route.ts": {
       "maxDuration": 300
-    },
-    "app/api/guests/submit/route.ts": {
-      "maxDuration": 300
     }
   }
 }

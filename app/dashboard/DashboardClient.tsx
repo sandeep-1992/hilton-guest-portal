@@ -132,7 +132,7 @@ export default function DashboardClient() {
       </div>
 
       <div className="stat-grid">
-        <motionStat count={count} error={countError} onRefresh={loadCount} />
+        <GuestCountCard count={count} error={countError} onRefresh={loadCount} />
         <article className="stat">
           <div className="stat-label">Your upload</div>
           <div className="stat-value" style={{ fontSize: '2rem' }}>
@@ -223,7 +223,7 @@ export default function DashboardClient() {
   );
 }
 
-function motionStat({
+function GuestCountCard({
   count,
   error,
   onRefresh,
