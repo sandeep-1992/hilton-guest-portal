@@ -12,7 +12,9 @@
 | `WORKMATE_API_URL` | `https://workmate.2kvoiceai.com` |
 | `WORKMATE_API_KEY` | *(from workmate config)* |
 | `WORKMATE_BASIC_AUTH_USER` | `workmate` |
-| `WORKMATE_BASIC_AUTH_PASSWORD` | *(from workmate config)* |
+| `WORKMATE_BASIC_AUTH_PASSWORD` | *(from workmate config — `WORKMATE_BASIC_AUTH_PASS` in file)* |
+
+**Required for “Send to front desk”:** `WORKMATE_API_URL` + `WORKMATE_API_KEY`. Without these, the count still works but uploads will not send.
 
 3. Deploy. Sign-in URL: `https://<your-vercel-domain>/login`
 

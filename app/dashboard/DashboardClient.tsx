@@ -13,6 +13,7 @@ export default function DashboardClient() {
   const [progress, setProgress] = useState(0);
   const [status, setStatus] = useState('');
   const [results, setResults] = useState<string[]>([]);
+  const [canSendGuests, setCanSendGuests] = useState(true);
 
   const loadCount = useCallback(async () => {
     setCountError('');
@@ -34,6 +35,13 @@ export default function DashboardClient() {
     const t = setInterval(loadCount, 60_000);
     return () => clearInterval(t);
   }, [loadCount]);
+
+  useEffect(() => {
+    fetch('/api/capabilities', { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((data) => setCanSendGuests(data.canSendGuests !== false))
+      .catch(() => setCanSendGuests(false));
+  }, []);
 
   async function onFile(file: File | null) {
     setParseNote('');
@@ -142,6 +150,22 @@ export default function DashboardClient() {
         </article>
       </div>
 
+      {!canSendGuests ? (
+        <div
+          className="card"
+          style={{
+            marginBottom: '1.25rem',
+            borderTopColor: '#b45309',
+            background: '#fffbeb',
+          }}
+        >
+          <p style={{ margin: 0, color: '#78350f', lineHeight: 1.5 }}>
+            Viewing guest totals works. <strong>Sending new lists</strong> still needs one-time setup on the
+            hosting side (Workmate connection). Your administrator can add the keys in Vercel, then redeploy.
+          </p>
+        </div>
+      ) : null}
+
       <section className="card" style={{ marginBottom: '1.5rem' }}>
         <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 500, marginTop: 0 }}>
           Add guests from a spreadsheet
@@ -189,7 +213,7 @@ export default function DashboardClient() {
           type="button"
           className="btn"
           style={{ marginTop: '1.5rem' }}
-          disabled={!rows.length || runState === 'running'}
+          disabled={!rows.length || runState === 'running' || !canSendGuests}
           onClick={sendAll}
         >
           {runState === 'running' ? 'Sending…' : 'Send to front desk'}
