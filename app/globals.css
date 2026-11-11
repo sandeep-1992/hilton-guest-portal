@@ -1,0 +1,246 @@
+:root {
+  --cream: #f3f0ea;
+  --ink: #111111;
+  --gold: #a68445;
+  --gold-light: #c9a962;
+  --slate: #3d4c5c;
+  --card: #ffffff;
+  --shadow: 0 18px 50px rgba(17, 17, 17, 0.08);
+  --radius: 4px;
+  --font-sans: 'Segoe UI', system-ui, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+a {
+  color: var(--gold);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  width: 100%;
+}
+
+.brand-mark {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+}
+
+.brand-mark::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 2px;
+  background: var(--gold);
+  margin: 14px auto 0;
+}
+
+.eyebrow {
+  text-align: center;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--gold);
+  margin: 1.5rem 0 0.5rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--slate);
+  max-width: 28rem;
+  margin: 0 auto 2rem;
+  line-height: 1.55;
+  font-size: 0.98rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid #e4dfd6;
+  border-top: 6px solid var(--ink);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.stat {
+  background: var(--card);
+  border: 1px solid #e4dfd6;
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.stat-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.stat-note {
+  margin-top: 0.65rem;
+  font-size: 0.88rem;
+  color: var(--slate);
+}
+
+label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='file'] {
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #d7d2c8;
+  border-radius: 0;
+  font-size: 1rem;
+  background: #fff;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.35rem;
+  background: var(--ink);
+  color: #fff;
+  border: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.btn:hover {
+  background: #2a2a2a;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid #d7d2c8;
+  width: auto;
+  padding: 0.55rem 1rem;
+}
+
+.error {
+  color: #b91c1c;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+.success {
+  color: #15803d;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+.preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-top: 1rem;
+}
+
+.preview-table th,
+.preview-table td {
+  border: 1px solid #e4dfd6;
+  padding: 0.45rem 0.55rem;
+  text-align: left;
+}
+
+.preview-table th {
+  background: #faf8f5;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.progress {
+  margin-top: 1rem;
+  height: 6px;
+  background: #e4dfd6;
+  overflow: hidden;
+}
+
+.progress > span {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.muted {
+  color: var(--slate);
+  font-size: 0.9rem;
+}
